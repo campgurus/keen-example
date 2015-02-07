@@ -1,4 +1,104 @@
-<h2>Hello World</h2>
-<p>
-  The time is now: <%= Time.now %>
-</p>
+<script type="text/javascript">
+  var Keen=Keen||{configure:function(a,b,c){this._pId=a;this._ak=b;this._op=c},addEvent:function(a,b,c,d){this._eq=this._eq||[];this._eq.push([a,b,c,d])},setGlobalProperties:function(a){this._gp=a},onChartsReady:function(a){this._ocrq=this._ocrq||[];this._ocrq.push(a)}};
+  (function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://":"http://")+"dc8na2hxrj29i.cloudfront.net/code/keen-2.0.0-min.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();
+var client = Keen.configure({
+  projectId: ENV['KEEN_PROJECT_ID'],
+  readKey: ENV['KEEN_READ_KEY'],
+  writeKey: ENV['KEEN_WRITE_KEY']
+});
+
+Keen.ready(function(){
+// --------------------------------------------------------
+// Program Views Column Chart
+// --------------------------------------------------------
+
+  var query = new Keen.Query("count", {
+    eventCollection: "view_program",
+    timeframe: "this_30_days",
+    interval: "daily",
+    groupBy: "program_id"
+  });
+  client.draw(total_pageviews, document.getElementById("total-views-columnchart"), {
+  chartType: "columnchart",
+  title: "Daily views (last 30 days)",
+  chartOptions: {
+    isStacked: true
+  }
+  });
+
+</script>
+  <div class="container-fluid">
+  	<div class="wide">
+
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Total Listing Views
+          </div>
+          <div class="chart-stage">
+            <div id="total-views-columnchart">This text will get replaced by the graph.
+            </div>
+          </div>
+          <div class="chart-notes">
+            This chart shows how many people viewed this listing in the last 30
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Cell Title
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x240/white">
+          </div>
+          <div class="chart-notes">
+            Notes about this chart
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Cell Title
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x120/white">
+          </div>
+          <div class="chart-notes">
+            Notes about this chart
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Cell Title
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x120/white">
+          </div>
+          <div class="chart-notes">
+            Notes about this chart
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Cell Title
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x120/white">
+          </div>
+          <div class="chart-notes">
+            Notes about this chart
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
