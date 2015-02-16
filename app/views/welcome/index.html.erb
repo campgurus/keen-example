@@ -1,8 +1,9 @@
 <script src="https://d26b395fwzu5fz.cloudfront.net/3.2.2/keen.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-var client = new.Keen({
+var client = new Keen({
   projectId: "53ffb525709a395fcf000002",
-  readKey: "5c8d03488263a158adafbb2eb43f7e4af1f4600c9c58da7d07a98fd8195c637455b364df209ca160a135207bf38164797f6fe8d65446a20211b923c84068c99ed0896466efdade0617de7e88e04ada3ccb11b7f9605cf7dab00c374e7485e52157dc93ad6752b7c7e61a438230d9625b"
+  readKey: "5c8d03488263a158adafbb2eb43f7e4af1f4600c9c58da7d07a98fd8195c637455b364df209ca160a135207bf38164797f6fe8d65446a20211b923c84068c99ed0896466efdade0617de7e88e04ada3ccb11b7f9605cf7dab00c374e7485e52157dc93ad6752b7c7e61a438230d9625b",
+  writeKey: "ad0a0adefa72c6a7ab867cafa029e0c9776db8f70fc84e9f08f68c7c0e2965d66f147fd299851d5ac54a6322a8e4197ada642da652648562b9ed6291f7f1f4cbf8651c753ca54ea0aac99bad712028124881be3934db5e1b627fec338527eab00916825b8e89076dec94eaab7d63af75"
 });
 
 Keen.ready(function(){
@@ -10,11 +11,12 @@ Keen.ready(function(){
 // Program Views Column Chart
 // --------------------------------------------------------
 
+ 
   var total_pageviews = new Keen.Query("count", {
     eventCollection: "view_program",
     timeframe: "this_30_days",
     interval: "daily",
-    groupBy: "program_id"
+    filters: [{"property_name":"program_id","operator":"eq","property_value":59963}]
   });
   client.draw(total_pageviews, document.getElementById("total-views-columnchart"), {
   chartType: "columnchart",
@@ -26,8 +28,19 @@ Keen.ready(function(){
 });
 
 </script>
+<script>
+  $(document).on('click', 'a', function (event) {
+    console.log("this is the click");
+    return client.trackExternalLink(event,"external_link_click",{
+      "title": event.currentTarget.text,
+      "href": encodeURIComponent(event.currentTarget.href)
+    });
+  });
+</script> 
 
   <div class="container-fluid">
+    <h2><%= "Analytics for This Program" %></h2>
+    <a href="http://google.com" target="_blank">Google</a>
   	<div class="wide">
 
     <div class="row">
@@ -100,6 +113,3 @@ Keen.ready(function(){
           </div>
         </div>
       </div>
-    </div>
-    <iframe src="https://kidnimble.com/search"></iframe>
-    </div>
